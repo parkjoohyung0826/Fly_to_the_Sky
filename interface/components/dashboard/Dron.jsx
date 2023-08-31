@@ -28,7 +28,7 @@ const Content = styled(Swiper)`
     margin-top: 20px;
     height: 85%;
     border-radius: 15px;
-    width: 450px;
+    width: 320px;
 `
 
 const Item = styled(SwiperSlide)`
@@ -220,6 +220,7 @@ function Dron() {
                     <Show src={drownVideo} controls autoplay loop />
                     <Info>
                         <h1>Detection</h1>
+                        <div>Section : Part B</div>
                         <div>Boat : 3</div>
                         <div>People : 3</div>
                         <div>Warning : 3</div>
