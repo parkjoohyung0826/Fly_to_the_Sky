@@ -244,9 +244,7 @@ function Cctv() {
                     <Show src={what === 0 ? first : what === 1 ? second : what === 2 ? third : fourth}/>
                     <Info>
                         <h1>Detection</h1>
-                        <div>Boat : 3</div>
-                        <div>People : 3</div>
-                        <div>Warning : 3</div>
+                        <div>Rip Current : {what === 0 ? "1" : what === 1 ? "5" : what === 2 ? "3" : "1"}</div>
                     </Info>
                 </VideoContent>
             </Overlay> 

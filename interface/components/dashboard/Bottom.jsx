@@ -9,7 +9,7 @@ const Container = styled.div`
   font-family: 'Outfit', sans-serif;
   padding: 25px;
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
+  grid-template-columns: 2.3fr 1fr;
   column-gap: 40px;
 `
 
