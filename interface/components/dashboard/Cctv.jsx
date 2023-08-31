@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faA, faB, faC, faD } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import first from "../img/1.jpeg";
+import second from "../img/2.jpeg";
+import third from "../img/3.jpeg";
+import fourth from "../img/4.jpeg";
+
 
 const Container = styled.div`
   width: 100%;
@@ -24,6 +32,7 @@ const Content = styled.div`
 `
 
 const Box = styled.div`
+    cursor: pointer;
     background-color: white;
     width: 100%;
     height: 100%;
@@ -77,21 +86,83 @@ const Footer = styled.div`
     }
 `
 
+const Overlay = styled(motion.div)`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    font-family: 'Outfit', sans-serif;
+    color : #414F64;
+`;
+
+const VideoContent = styled.div`
+    background-color: white;
+    border-radius: 15px;
+    width: 80vw;
+    height: 80vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+`
+
+const Xmark = styled(FontAwesomeIcon)`
+    position: absolute;
+    right: 20px;
+    top : 20px;
+    font-size: 32px;
+    cursor: pointer;
+    color : #414F64;
+`
+
+
+const Show = styled.img`
+    width: 100%;
+    height: 100%;
+`
+
+const Info = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
+    h1{
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+    div{
+        margin-top: 10px;
+    }
+`
+
 
 function Cctv() {
+    const [clicked, setClicked] = useState(false);
+    const [what, setWhat] = useState(null);
 
     return (
+      <>
       <Container>
         <Title>Cctv</Title>
         <Content>
             {/* Part A */}
-            <Box>
+            <Box onClick={()=>{
+                setWhat(0);
+                setClicked(true);
+            }}>
                 <Head>
                     <IconBox bgColor="rgb(62,42,140)">
                         <Icon icon={faA}/>
                     </IconBox>
                     <Status textColor="rgb(62,42,140)">
-                        20% (Good)
+                        40% (Fine)
                     </Status>
                 </Head>
                 <Footer>
@@ -101,13 +172,16 @@ function Cctv() {
             </Box>
 
             {/* Part B */}
-            <Box>
+            <Box onClick={()=>{
+                setClicked(true);
+                setWhat(1);
+            }}>
             <Head>
                 <IconBox bgColor="rgb(252,179,72)">
                     <Icon icon={faB}/>
                 </IconBox>
                 <Status textColor="rgb(252,179,72)">
-                    0% (Great)
+                    80% (Worse)
                 </Status>
                 </Head>
                 <Footer>
@@ -117,13 +191,16 @@ function Cctv() {
             </Box>
 
             {/* Part C */}
-            <Box>
+            <Box onClick={()=>{
+                setClicked(true);
+                setWhat(2);
+            }}>
             <Head>
                 <IconBox bgColor="rgb(83,90,255)">
                     <Icon icon={faC}/>
                 </IconBox>
                 <Status textColor="rgb(83,90,255)">
-                    40% (fine)
+                    60% (Bad)
                 </Status>
                 </Head>
                 <Footer>
@@ -133,13 +210,16 @@ function Cctv() {
             </Box>
 
             {/* Part D */}
-            <Box>
+            <Box onClick={()=>{
+                setClicked(true);
+                setWhat(3);
+            }}>
             <Head>
                 <IconBox bgColor="rgb(80,212,219)">
                     <Icon icon={faD}/>
                 </IconBox>
                 <Status textColor="rgb(80,212,219)">
-                    20% (Good)
+                    40% (Fine)
                 </Status>
                 </Head>
                 <Footer>
@@ -150,6 +230,30 @@ function Cctv() {
 
         </Content>
       </Container>
+      
+      {/* 모달창 */}
+      <AnimatePresence>
+          {clicked ? 
+            <Overlay 
+              initial={{ opacity : 0}}
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }}
+            >
+                <VideoContent>
+                    <Xmark icon={faCircleXmark} onClick={()=>setClicked(false)}/>
+                    <Show src={what === 0 ? first : what === 1 ? second : what === 2 ? third : fourth}/>
+                    <Info>
+                        <h1>Detection</h1>
+                        <div>Boat : 3</div>
+                        <div>People : 3</div>
+                        <div>Warning : 3</div>
+                    </Info>
+                </VideoContent>
+            </Overlay> 
+            :
+            null}
+        </AnimatePresence>
+      </>
     )
   }
   

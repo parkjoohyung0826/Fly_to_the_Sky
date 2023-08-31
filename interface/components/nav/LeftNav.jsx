@@ -13,6 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding-left: 30px;
+  font-family: 'Outfit', sans-serif;
 `
 
 const TopMenu = styled.div`
